@@ -971,3 +971,230 @@ a.project-link:hover {
     transform: none;
   }
 }
+
+
+/* =========================================
+   FINITIONS VISUELLES — animations & détails
+   ========================================= */
+
+/* Fine grille discrète en arrière-plan */
+body {
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.13;
+  background-image:
+    linear-gradient(rgba(108, 155, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 155, 255, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+/* Navigation plus nette et légèrement vitrée */
+.site-nav {
+  background: rgba(11, 11, 15, 0.78);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(108, 155, 255, 0.12);
+}
+
+.nav-links a {
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+}
+
+/* Entrée douce du contenu d'accueil */
+.hero-copy {
+  animation: hero-rise 760ms cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.terminal-card {
+  animation: hero-rise 900ms 120ms cubic-bezier(.2, .7, .2, 1) both;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(108, 155, 255, 0.035);
+}
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Titres : petit accent lumineux */
+.section-heading h2 {
+  text-wrap: balance;
+  text-shadow: 0 0 34px rgba(108, 155, 255, 0.055);
+}
+
+.heading-period {
+  text-shadow: 0 0 22px rgba(108, 155, 255, 0.32);
+}
+
+/* Cartes plus profondes, avec reflet subtil au survol */
+.project-card,
+.certification-card,
+.skills-panel {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.12);
+}
+
+.project-card::before,
+.certification-card::before,
+.skills-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(480px circle at var(--pointer-x, 50%) var(--pointer-y, 0%), rgba(108, 155, 255, 0.09), transparent 42%);
+  transition: opacity 220ms ease;
+}
+
+.project-card:hover::before,
+.certification-card:hover::before,
+.skills-panel:hover::before {
+  opacity: 1;
+}
+
+.project-card,
+.certification-card {
+  transition:
+    transform 260ms cubic-bezier(.2, .7, .2, 1),
+    border-color 260ms ease,
+    background 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.project-card:hover,
+.certification-card:hover {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28), 0 0 26px rgba(108, 155, 255, 0.055);
+}
+
+.project-featured {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(47, 203, 184, 0.075), transparent 48%),
+    linear-gradient(155deg, rgba(21, 21, 28, 0.97), rgba(15, 15, 21, 0.9));
+}
+
+.project-featured:hover {
+  border-color: rgba(47, 203, 184, 0.65);
+}
+
+/* Les étiquettes réagissent légèrement au survol */
+.tag-list span,
+.skill-list span {
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.tag-list span:hover,
+.skill-list span:hover {
+  color: var(--ink);
+  border-color: rgba(108, 155, 255, 0.55);
+  background: rgba(108, 155, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Liens et boutons : flèche qui glisse légèrement */
+.project-link,
+.text-link,
+.button,
+.contact-link {
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.project-link:hover,
+.text-link:hover {
+  border-color: var(--teal);
+}
+
+.project-link span,
+.text-link span,
+.button span,
+.contact-arrow {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+
+.project-link:hover span,
+.text-link:hover span,
+.button:hover span,
+.contact-link:hover .contact-arrow {
+  transform: translate(3px, -2px);
+}
+
+.button-primary {
+  box-shadow: 0 8px 24px rgba(108, 155, 255, 0.13);
+}
+
+.button-primary:hover {
+  box-shadow: 0 12px 32px rgba(108, 155, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.button-secondary:hover {
+  border-color: rgba(108, 155, 255, 0.55);
+  background: rgba(108, 155, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.contact-link:hover {
+  border-color: rgba(108, 155, 255, 0.42);
+  background: rgba(108, 155, 255, 0.035);
+}
+
+/* Focus clavier bien visible */
+.project-link:focus-visible,
+.text-link:focus-visible,
+.button:focus-visible,
+.certification-card:focus-visible,
+.contact-link:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+}
+
+/* Laisser le contenu respirer sur les petits écrans */
+@media (max-width: 620px) {
+  body::before {
+    background-size: 36px 36px;
+    opacity: 0.08;
+  }
+
+  .project-card:hover,
+  .certification-card:hover,
+  .button-primary:hover,
+  .button-secondary:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy,
+  .terminal-card {
+    animation: none !important;
+  }
+
+  .project-card,
+  .certification-card,
+  .tag-list span,
+  .skill-list span,
+  .project-link,
+  .text-link,
+  .button,
+  .contact-link {
+    transition: none !important;
+  }
+}
+
